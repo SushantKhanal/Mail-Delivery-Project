@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { updateLocalStorageUserData } from "./utils/localStorageService";
 import { LOGOUT_EVENT } from "./constants";
 import Emitter from "./shared/Emitter";
-import SignIn from "./authentication/SignIn";
+import SignIn from "./screens/authentication/SignIn";
 import Home from "./screens/Home";
 
 function App() {

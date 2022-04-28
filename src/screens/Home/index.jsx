@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import ButtonAppBar from "../../components/ButtonAppBar";
-import SideDrawer from "../../components/SideDrawer";
+import ButtonAppBar from "./ButtonAppBar";
+import SideDrawer from "./SideDrawer";
 import Emitter from "../../shared/Emitter";
 import { updateLocalStorageUserData } from "../../utils/localStorageService";
 import { LOGOUT_EVENT } from "../../constants";
