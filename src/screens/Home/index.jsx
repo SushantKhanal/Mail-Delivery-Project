@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ButtonAppBar from "../../components/ButtonAppBar";
+import SideDrawer from "../../components/SideDrawer";
 import Emitter from "../../shared/Emitter";
 import { updateLocalStorageUserData } from "../../utils/localStorageService";
 import { LOGOUT_EVENT } from "../../constants";
@@ -17,7 +18,7 @@ export default function Home(props) {
           onLogOutSuccess({});
         }}
       />
-      <h1>This is Home!</h1>
+      <SideDrawer />
     </div>
   );
 }
