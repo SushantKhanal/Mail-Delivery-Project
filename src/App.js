@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import { updateLocalStorageUserData } from "./utils/localStorageService";
+import { LOGOUT_EVENT } from "./constants";
+import Emitter from "./shared/Emitter";
+import SignIn from "./authentication/SignIn";
+import Home from "./screens/Home";
 
 function App() {
+  let [isLoggedIn, setLoggedIn] = useState();
+
+  const changeLoggedInStateHandler = (data, state) => {
+    updateLocalStorageUserData(data, state);
+    setLoggedIn(state);
+  };
+
+  useEffect(() => {
+    Emitter.on(LOGOUT_EVENT, (data) => {
+      changeLoggedInStateHandler(data, false);
+    });
+    return () => {
+      Emitter.off(LOGOUT_EVENT);
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {!isLoggedIn ? (
+        <SignIn
+          changeLoggedInStateHandler={(data) => {
+            changeLoggedInStateHandler(data, true);
+          }}
+        />
+      ) : (
+        <Home />
+      )}
     </div>
   );
 }
