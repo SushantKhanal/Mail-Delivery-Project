@@ -8,7 +8,7 @@ import {
   ABOUT,
   SEND_MAIL,
   TRACK_MAIL,
-  DRAFTS,
+  CART,
   PAST_ORDERS,
   DELETED_ORDERS,
 } from "./constants";
@@ -24,7 +24,7 @@ function ResponsiveDrawer() {
     ABOUT,
     SEND_MAIL,
     TRACK_MAIL,
-    DRAFTS,
+    CART,
     PAST_ORDERS,
     DELETED_ORDERS,
   ];
