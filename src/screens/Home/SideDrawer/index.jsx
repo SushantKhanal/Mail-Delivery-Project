@@ -18,7 +18,7 @@ import ContentBox from "../ContentBox";
 const drawerWidth = 240;
 
 function ResponsiveDrawer() {
-  let [currentDrawerTab, setCurrentDrawerTab] = useState(ABOUT);
+  let [currentDrawerTab, setCurrentDrawerTab] = useState(SEND_MAIL);
 
   const drawerItemsList = [
     ABOUT,

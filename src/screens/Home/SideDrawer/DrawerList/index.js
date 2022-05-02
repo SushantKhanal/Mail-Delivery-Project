@@ -5,10 +5,10 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import { ABOUT } from "../constants";
+import { SEND_MAIL } from "../constants";
 
 export default function DrawerList(props) {
-  let [currentDrawerTab, setCurrentDrawerTab] = React.useState(ABOUT);
+  let [currentDrawerTab, setCurrentDrawerTab] = React.useState(SEND_MAIL);
   return (
     <div>
       <List>

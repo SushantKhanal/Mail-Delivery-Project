@@ -48,7 +48,7 @@ export default function SignIn(props) {
           height: "100%",
         }}
       >
-        <CircularProgress disableShrink />;
+        <CircularProgress disableShrink />
       </div>
     );
   };

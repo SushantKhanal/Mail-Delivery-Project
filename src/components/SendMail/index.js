@@ -4,8 +4,22 @@ import TextField from "@mui/material/TextField";
 import Scanner from "../Scanner";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
+import { useState } from "react";
 
 export default function SendMail(props) {
+  let [senderAddress, setSenderAddress] = useState("");
+  let [senderZip, setSenderZip] = useState("");
+  let [receiverAddress, setReceiverAddress] = useState("");
+  let [receiverZip, setReceiverZip] = useState("");
+
+  // const onSubmit = React.useCallback(() => {
+  // }, [senderAddress, senderZip, receiverAddress, receiverZip]);
+
+  const onSubmit = () => {
+    console.log(senderAddress, senderZip, receiverAddress, receiverZip);
+    alert("Mail Info Submitted Successfully!");
+  };
+
   return (
     <div>
       <Grid container spacing={3} marginBottom={10}>
@@ -17,6 +31,9 @@ export default function SendMail(props) {
             fullWidth
             autoComplete="cc-name"
             variant="standard"
+            onChange={(event) => {
+              setSenderAddress(event.target.value);
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -26,6 +43,7 @@ export default function SendMail(props) {
             label="Sender Zip Code"
             fullWidth
             variant="standard"
+            onChange={(event) => setSenderZip(event.target.value)}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -36,6 +54,7 @@ export default function SendMail(props) {
             fullWidth
             autoComplete="cc-name"
             variant="standard"
+            onChange={(event) => setReceiverAddress(event.target.value)}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -45,6 +64,7 @@ export default function SendMail(props) {
             label="Receiver Zip Code"
             fullWidth
             variant="standard"
+            onChange={(event) => setReceiverZip(event.target.value)}
           />
         </Grid>
       </Grid>
@@ -64,7 +84,7 @@ export default function SendMail(props) {
           type="submit"
           variant="contained"
           color="primary"
-          onClick={() => {}}
+          onClick={() => onSubmit()}
           style={{ width: "30%", marginTop: "20px" }}
         >
           Submit
