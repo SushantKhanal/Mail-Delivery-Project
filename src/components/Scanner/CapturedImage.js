@@ -9,7 +9,7 @@ export const CapturedImage = (props) => {
           : ""
       }
     >
-      <img src={props.imageUri} alt="" />
+      <img src={props.imageData} alt="" />
     </div>
   );
 };

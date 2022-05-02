@@ -6,24 +6,69 @@ import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 
+import { db } from "../../firebase-config";
+import { collection, addDoc } from "firebase/firestore";
+
 export default function SendMail(props) {
+  let [senderName, setSenderName] = useState("");
   let [senderAddress, setSenderAddress] = useState("");
   let [senderZip, setSenderZip] = useState("");
+  let [receiverName, setReceiverName] = useState("");
   let [receiverAddress, setReceiverAddress] = useState("");
   let [receiverZip, setReceiverZip] = useState("");
 
-  // const onSubmit = React.useCallback(() => {
-  // }, [senderAddress, senderZip, receiverAddress, receiverZip]);
+  const userCollectionRef = collection(db, "deliveryInfo");
 
-  const onSubmit = () => {
-    console.log(senderAddress, senderZip, receiverAddress, receiverZip);
-    alert("Mail Info Submitted Successfully!");
+  //CREATE
+  const addDeliveryInfo = async (trackingNumber) => {
+    await addDoc(userCollectionRef, {
+      currentAddress: senderAddress,
+      deliveryStatus: "PROCESSING",
+      receiverAddress,
+      receiverName,
+      receiverZip,
+      senderAddress,
+      senderName,
+      senderZip,
+      trackingNumber,
+    });
+  };
+
+  const resetState = () => {
+    setSenderName("");
+    setSenderAddress("");
+    setSenderZip("");
+    setReceiverName("");
+    setReceiverAddress("");
+    setReceiverZip("");
+  };
+
+  const onSubmit = async () => {
+    const trackingNumber = new Date().getTime();
+    addDeliveryInfo(trackingNumber).then(() => {
+      alert("Success! Your tracking Number is, " + trackingNumber);
+    });
+    resetState();
   };
 
   return (
     <div>
       <Grid container spacing={3} marginBottom={10}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={4}>
+          <TextField
+            required
+            id="senderName"
+            label="Sender Name"
+            fullWidth
+            autoComplete="cc-name"
+            variant="standard"
+            value={senderName}
+            onChange={(event) => {
+              setSenderName(event.target.value);
+            }}
+          />
+        </Grid>
+        <Grid item xs={12} md={4}>
           <TextField
             required
             id="senderAddress"
@@ -31,22 +76,38 @@ export default function SendMail(props) {
             fullWidth
             autoComplete="cc-name"
             variant="standard"
+            value={senderAddress}
             onChange={(event) => {
               setSenderAddress(event.target.value);
             }}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={4}>
           <TextField
             required
             id="senderZip"
             label="Sender Zip Code"
             fullWidth
             variant="standard"
+            value={senderZip}
             onChange={(event) => setSenderZip(event.target.value)}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={4}>
+          <TextField
+            required
+            id="receiverName"
+            label="Receiver Name"
+            fullWidth
+            autoComplete="cc-name"
+            variant="standard"
+            value={receiverName}
+            onChange={(event) => {
+              setReceiverName(event.target.value);
+            }}
+          />
+        </Grid>
+        <Grid item xs={12} md={4}>
           <TextField
             required
             id="receiverAddress"
@@ -54,16 +115,18 @@ export default function SendMail(props) {
             fullWidth
             autoComplete="cc-name"
             variant="standard"
+            value={receiverAddress}
             onChange={(event) => setReceiverAddress(event.target.value)}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={4}>
           <TextField
             required
             id="ReceiverZip"
             label="Receiver Zip Code"
             fullWidth
             variant="standard"
+            value={receiverZip}
             onChange={(event) => setReceiverZip(event.target.value)}
           />
         </Grid>
