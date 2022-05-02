@@ -7,6 +7,7 @@ import Home from "./screens/Home";
 
 function App() {
   let [isLoggedIn, setLoggedIn] = useState();
+  const [users, setUsers] = useState([]);
 
   const changeLoggedInStateHandler = (data, state) => {
     updateLocalStorageUserData(data, state);
