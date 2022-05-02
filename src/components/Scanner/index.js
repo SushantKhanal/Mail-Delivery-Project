@@ -5,19 +5,23 @@ import Tesseract from "tesseract.js";
 //Tesseract supports more than 100 languages, automatic text orientation and script detection
 import CapturedImage from "./CapturedImage";
 
-function Scanner(props) {
+function Scanner({ resetScanner }) {
   const [imageData, setImageData] = React.useState("");
 
   const imageToText = (imageData) => {
-    if (imageData)
-      Tesseract.recognize(imageData, {
-        lang: "eng",
-      })
-        .catch((error) => console.log("Error processing captured image"))
-        .then((res) => {
-          //save res.text
-        });
+    // if (imageData)
+    // Tesseract.recognize(imageData, {
+    //   lang: "eng",
+    // })
+    //   .catch((error) => console.log("Error processing captured image"))
+    //   .then((res) => {
+    //     //save res.text
+    //   });
   };
+
+  React.useEffect(() => {
+    if (resetScanner) setImageData("");
+  }, [resetScanner]);
 
   React.useEffect(() => {
     imageToText(imageData);

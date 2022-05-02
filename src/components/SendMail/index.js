@@ -16,6 +16,7 @@ export default function SendMail(props) {
   let [receiverName, setReceiverName] = useState("");
   let [receiverAddress, setReceiverAddress] = useState("");
   let [receiverZip, setReceiverZip] = useState("");
+  let [resetScanner, setResetScanner] = useState(false);
 
   const userCollectionRef = collection(db, "deliveryInfo");
 
@@ -41,6 +42,7 @@ export default function SendMail(props) {
     setReceiverName("");
     setReceiverAddress("");
     setReceiverZip("");
+    setResetScanner(true);
   };
 
   const onSubmit = async () => {
@@ -142,7 +144,7 @@ export default function SendMail(props) {
         <Typography variant="h6" gutterBottom>
           OR Scan barcode
         </Typography>
-        <Scanner />
+        <Scanner resetScanner={resetScanner}/>
         <Button
           type="submit"
           variant="contained"
