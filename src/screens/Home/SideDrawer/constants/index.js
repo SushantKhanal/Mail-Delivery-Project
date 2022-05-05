@@ -4,3 +4,4 @@ export const TRACK_MAIL = "Track Mail";
 export const CART = "Cart";
 export const REPORTS = "Reports";
 export const DELETED_ORDERS = "Deleted Orders";
+export const SHOW_PATH = "Show Path";

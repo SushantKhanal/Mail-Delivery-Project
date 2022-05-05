@@ -14,7 +14,9 @@ import {
   CART,
   REPORTS,
   DELETED_ORDERS,
+  SHOW_PATH,
 } from "../SideDrawer/constants";
+import DijkstrasPath from "../../../components/DijkstrasPath";
 
 let components = {
   [ABOUT]: <About />,
@@ -23,6 +25,7 @@ let components = {
   [CART]: <Cart />,
   [REPORTS]: <Reports />,
   [DELETED_ORDERS]: <DeletedOrders />,
+  [SHOW_PATH]: <DijkstrasPath />,
 };
 
 export default function ContentBox(props) {

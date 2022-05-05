@@ -11,6 +11,7 @@ import {
   CART,
   REPORTS,
   DELETED_ORDERS,
+  SHOW_PATH
 } from "./constants";
 import DrawerList from "./DrawerList";
 import ContentBox from "../ContentBox";
@@ -27,6 +28,7 @@ function ResponsiveDrawer() {
     CART,
     REPORTS,
     DELETED_ORDERS,
+    SHOW_PATH
   ];
 
   const changeCurrentTabHandler = (newTab) => {
