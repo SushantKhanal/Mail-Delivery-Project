@@ -46,6 +46,17 @@ export default function SendMail(props) {
   };
 
   const onSubmit = async () => {
+    if (
+      !senderName ||
+      !senderAddress ||
+      !senderZip ||
+      !receiverName ||
+      !receiverAddress ||
+      !receiverZip
+    ) {
+      alert("Cannot Submit without complete information!");
+      return;
+    }
     const trackingNumber = new Date().getTime();
     addDeliveryInfo(trackingNumber).then(() => {
       alert("Success! Your tracking Number is, " + trackingNumber);
@@ -144,7 +155,7 @@ export default function SendMail(props) {
         <Typography variant="h6" gutterBottom>
           OR Scan barcode
         </Typography>
-        <Scanner resetScanner={resetScanner}/>
+        <Scanner resetScanner={resetScanner} />
         <Button
           type="submit"
           variant="contained"
