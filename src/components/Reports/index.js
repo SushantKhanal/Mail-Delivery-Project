@@ -1,31 +1,78 @@
 import * as React from "react";
-import { jsPDF } from "jspdf";
 import { Button } from "@mui/material";
+import { useEffect, useState } from "react";
 
-class Reports extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+import { db } from "../../firebase-config";
+import { collection, getDocs } from "firebase/firestore";
+const userCollectionRef = collection(db, "deliveryInfo");
 
-  generatePDF = () => {
-    var doc = new jsPDF("p", "pt");
+export default function Reports() {
+  const [reports, setReports] = useState([]);
 
-    doc.text(20, 20, "This is the first title.");
-    doc.addFont("helvetica", "normal");
-    doc.text(20, 60, "This is the second title.");
-    doc.text(20, 100, "This is the thrid title.");
+  useEffect(() => {
+    const getUsers = async () => {
+      let data = await getDocs(userCollectionRef);
+      data = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setReports(data);
+    };
+    getUsers();
+  }, []);
 
-    doc.save("reports.pdf");
+  const generateTextFile = () => {
+    var longString = "";
+    reports.forEach(function (report, i) {
+      longString +=
+        "Parcel " +
+        (i + 1) +
+        "(" +
+        report.deliveryStatus +
+        "):\n" +
+        "Current Address: " +
+        report.currentAddress +
+        ", " +
+        "Receiver Status: " +
+        report.receiverAddress +
+        ", " +
+        "Receiver Name: " +
+        report.receiverName +
+        ", " +
+        "Receiver Zip: " +
+        report.receiverZip +
+        ", " +
+        "Sender Address: " +
+        report.senderAddress +
+        ", " +
+        "Sender Name: " +
+        report.senderName +
+        ", " +
+        "Sender Zip: " +
+        report.senderZip +
+        ", " +
+        "Tracking Number: " +
+        report.trackingNumber +
+        ".  \n \n";
+    });
+    downloadTextFile(longString);
   };
 
-  render() {
-    return (
-      <div>
-        <Button onClick={this.generatePDF}>Download PDF</Button>
-      </div>
+  const downloadTextFile = (longString) => {
+    var element = document.createElement("a");
+    element.setAttribute(
+      "href",
+      "data:text/plain;charset=utf-8," + encodeURIComponent(longString)
     );
-  }
-}
+    element.setAttribute("download", "reports");
+    element.style.display = "none";
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  };
 
-export default Reports;
+  return (
+    <div>
+      {reports && (
+        <Button onClick={generateTextFile}>Download Text File</Button>
+      )}
+    </div>
+  );
+}

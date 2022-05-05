@@ -8,6 +8,5 @@ export const getItem = (title) => myStorage.getItem(title);
 export const deleteItem = (title) => myStorage.removeItem(title);
 
 export const updateLocalStorageUserData = (data, state) => {
-  !state ? deleteItem("userData") : saveItem("userData", data);
-  state && saveItem("userData", data);
+  !state ? deleteItem("userData") : saveItem("userData", { loggedIn: true });
 };

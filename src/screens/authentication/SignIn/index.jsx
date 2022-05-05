@@ -12,15 +12,17 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useState } from "react";
 
 export default function SignIn(props) {
-  let [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    if (email !== "admin" || password !== "admin") {
+      alert("Invalid username or password!");
+      return;
+    }
     //CHECK IF CREDENTIALS VALID
     setIsLoading(true);
     setTimeout(() => {
@@ -30,11 +32,7 @@ export default function SignIn(props) {
   };
 
   const onSuccess = (res) => {
-    props.changeLoggedInStateHandler(res, true);
-  };
-
-  const onFailure = (res) => {
-    alert("[Login Failed] res:", res);
+    props.changeLoggedInStateHandler(res);
   };
 
   const loading = () => {
@@ -54,28 +52,31 @@ export default function SignIn(props) {
   };
 
   const displayForm = () => (
-    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+    <Box noValidate sx={{ mt: 1 }}>
       <TextField
         margin="normal"
         required
         fullWidth
-        id="email"
         label="Email Address"
-        name="email"
-        autoComplete="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         autoFocus
       />
       <TextField
         margin="normal"
         required
         fullWidth
-        name="password"
         label="Password"
         type="password"
-        id="password"
-        autoComplete="current-password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
       />
-      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 4 }}>
+      <Button
+        onClick={handleSubmit}
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 4 }}
+      >
         Sign In
       </Button>
     </Box>
