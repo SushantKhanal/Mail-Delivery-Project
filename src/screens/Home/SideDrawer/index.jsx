@@ -9,7 +9,7 @@ import {
   SEND_MAIL,
   TRACK_MAIL,
   CART,
-  PAST_ORDERS,
+  REPORTS,
   DELETED_ORDERS,
 } from "./constants";
 import DrawerList from "./DrawerList";
@@ -25,7 +25,7 @@ function ResponsiveDrawer() {
     SEND_MAIL,
     TRACK_MAIL,
     CART,
-    PAST_ORDERS,
+    REPORTS,
     DELETED_ORDERS,
   ];
 

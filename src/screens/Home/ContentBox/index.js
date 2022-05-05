@@ -4,7 +4,7 @@ import { Toolbar } from "@mui/material";
 import About from "../../../components/About";
 import Cart from "../../../components/Cart";
 import DeletedOrders from "../../../components/DeletedOrders";
-import PastOrders from "../../../components/PastOrders";
+import Reports from "../../../components/Reports";
 import SendMail from "../../../components/SendMail";
 import TrackMail from "../../../components/TrackMail";
 import {
@@ -12,7 +12,7 @@ import {
   SEND_MAIL,
   TRACK_MAIL,
   CART,
-  PAST_ORDERS,
+  REPORTS,
   DELETED_ORDERS,
 } from "../SideDrawer/constants";
 
@@ -21,7 +21,7 @@ let components = {
   [SEND_MAIL]: <SendMail />,
   [TRACK_MAIL]: <TrackMail />,
   [CART]: <Cart />,
-  [PAST_ORDERS]: <PastOrders />,
+  [REPORTS]: <Reports />,
   [DELETED_ORDERS]: <DeletedOrders />,
 };
 
