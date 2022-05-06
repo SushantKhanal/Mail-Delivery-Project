@@ -4,7 +4,7 @@
 
 #### Download this project open a command line and in the project directory enter "npm install"
 
-#### Enter "npm start" in the command line to start this project.
+#### Then enter "npm start" in the command line to start this project.
 
 In the login page the username is "admin" and password is also "admin"
 
