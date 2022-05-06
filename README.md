@@ -1,8 +1,10 @@
-## This is a Mail Delivery System app with Javascript language, react framework and firebase database
+## A simple mail delivery app
 
-### Download this project open a command line and in the project directory enter "npm install"
+### Based on Javascript language, react framework and firebase database
 
-### Enter "npm start" in the command line to start this project.
+#### Download this project open a command line and in the project directory enter "npm install"
+
+#### Enter "npm start" in the command line to start this project.
 
 In the login page the username is "admin" and password is also "admin"
 
